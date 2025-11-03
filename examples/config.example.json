@@ -1,0 +1,7 @@
+{
+  "api_key": "your_api_key_here",
+  "cache_enabled": true,
+  "cache_ttl_hours": 24,
+  "default_language": "en",
+  "log_level": "info"
+}
