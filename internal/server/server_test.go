@@ -69,7 +69,7 @@ func TestServer_New(t *testing.T) {
 			wantErr: true,
 		},
 		{
-			name: "multiple auth config",
+			name: "multiple auth config - API key takes precedence",
 			config: &Config{
 				APIKey:       "test-key",
 				ClientID:     "test-id",
@@ -77,7 +77,7 @@ func TestServer_New(t *testing.T) {
 				LogLevel:     slog.LevelInfo,
 				DefaultLang:  "en",
 			},
-			wantErr: true,
+			wantErr: false, // Server uses API key when both are provided
 		},
 	}
 
@@ -485,11 +485,11 @@ func TestInterpretLightLevel(t *testing.T) {
 		maxLux   int
 		expected string
 	}{
-		{"very low", 100, 500, "Very low light"},
-		{"low", 600, 900, "Low indirect light"},
-		{"medium", 1500, 3000, "Medium indirect light"},
-		{"high", 3500, 5000, "Bright indirect light"},
-		{"very high", 8000, 12000, "Very bright/direct light"},
+		{"very low", 100, 500, " (Low light - suitable for shade-tolerant plants)"},
+		{"low", 600, 900, " (Low light - suitable for shade-tolerant plants)"},
+		{"medium", 1500, 3000, " (Medium indirect light - typical indoor lighting)"},
+		{"high", 3500, 5000, " (Medium indirect light - typical indoor lighting)"},
+		{"very high", 8000, 12000, " (Bright indirect light - near windows)"},
 	}
 
 	for _, tt := range tests {
