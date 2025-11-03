@@ -562,7 +562,7 @@ func (s *Server) handleServerInfo(ctx context.Context, request mcp.CallToolReque
 		},
 		"sdk": map[string]interface{}{
 			"name":    "openplantbook-go",
-			"version": "v1.0.1",
+			"version": openplantbook.Version,
 		},
 		"mcp_framework": map[string]interface{}{
 			"name":    "mcp-go",
