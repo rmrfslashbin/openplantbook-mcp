@@ -24,7 +24,7 @@ Run these 5 essential tests to verify basic functionality:
 Search for "monstera" plants in the OpenPlantbook database.
 ```
 
-**Expected:** Returns 1-3 Monstera varieties with PIDs like "monstera-deliciosa"
+**Expected:** Returns 1-3 Monstera varieties with PIDs like "monstera deliciosa" (lowercase with spaces)
 
 ---
 
@@ -32,7 +32,7 @@ Search for "monstera" plants in the OpenPlantbook database.
 
 **Prompt:**
 ```
-Get the care requirements for "monstera-deliciosa" including light, temperature, and moisture needs.
+Get the care requirements for "monstera deliciosa" including light, temperature, and moisture needs.
 ```
 
 **Expected:** Returns complete care data with lux, temperature (°C), and moisture percentage ranges
@@ -43,7 +43,7 @@ Get the care requirements for "monstera-deliciosa" including light, temperature,
 
 **Prompt:**
 ```
-Get a human-readable care summary for "basil-sweet".
+Get a human-readable care summary for "ocimum basilicum".
 ```
 
 **Expected:** Returns Markdown-formatted summary with interpreted light levels and care instructions
@@ -54,7 +54,7 @@ Get a human-readable care summary for "basil-sweet".
 
 **Prompt:**
 ```
-Compare these sensor readings against ideal conditions for "monstera-deliciosa":
+Compare these sensor readings against ideal conditions for "monstera deliciosa":
 - Moisture: 45%
 - Temperature: 22°C
 - Light: 2000 lux

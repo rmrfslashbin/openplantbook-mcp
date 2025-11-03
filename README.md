@@ -102,7 +102,7 @@ Found 3 Monstera varieties:
 
 **Getting care details:**
 ```
-User: "What are the care requirements for monstera-deliciosa?"
+User: "What are the care requirements for monstera deliciosa?"
 Claude: [Uses get_plant_care tool]
 Monstera deliciosa needs:
 - Light: 1500-3000 lux (Medium indirect light)
@@ -125,9 +125,11 @@ Summary: 1 condition needs attention - increase watering.
 
 ## Available Tools
 
+> **Note on Plant IDs (PIDs):** The OpenPlantbook API uses lowercase plant names with spaces as identifiers (e.g., `"monstera deliciosa"`, `"ocimum basilicum"`). Always use the exact `pid` value returned from `search_plants` when calling other tools.
+
 ### search_plants
 
-Search for plants by common or scientific name.
+Search for plants by common or scientific name. Returns plant IDs in lowercase with spaces.
 
 **Parameters:**
 - `query` (string, required): Plant name to search
@@ -152,7 +154,7 @@ Get detailed care requirements for a specific plant.
 **Example:**
 ```json
 {
-  "pid": "monstera-deliciosa",
+  "pid": "monstera deliciosa",
   "language": "en"
 }
 ```
@@ -168,7 +170,7 @@ Get a human-readable care summary with interpreted ranges.
 **Example:**
 ```json
 {
-  "pid": "basil-sweet",
+  "pid": "ocimum basilicum",
   "metric": true
 }
 ```
@@ -188,7 +190,7 @@ Compare current sensor readings against ideal plant care ranges.
 **Example:**
 ```json
 {
-  "pid": "monstera-deliciosa",
+  "pid": "monstera deliciosa",
   "current_conditions": {
     "moisture": 45,
     "temperature": 22,

@@ -38,7 +38,7 @@ Search for "tomato" plants using the OpenPlantbook MCP server. Show me the resul
 **Pass Criteria:**
 - ✅ Search completes successfully
 - ✅ Returns valid JSON data
-- ✅ Plant IDs are in lowercase-hyphenated format (e.g., "tomato-common")
+- ✅ Plant IDs are in lowercase with spaces (e.g., "solanum lycopersicum")
 - ✅ Display names are human-readable
 
 ---
@@ -59,7 +59,7 @@ Search for "Monstera deliciosa" in the OpenPlantbook database. How many varietie
 
 **Pass Criteria:**
 - ✅ Search finds at least 1 result
-- ✅ Results include "monstera-deliciosa" or similar PID
+- ✅ Results include "monstera deliciosa" or similar PID
 - ✅ Category is included in results
 
 ---
@@ -111,7 +111,7 @@ Search for "xyzabc123notaplant" in the OpenPlantbook database. What happens?
 
 **Prompt:**
 ```
-Get the complete care details for "monstera-deliciosa" from OpenPlantbook. Show me the light, temperature, humidity, and moisture requirements.
+Get the complete care details for "monstera deliciosa" from OpenPlantbook. Show me the light, temperature, humidity, and moisture requirements.
 ```
 
 **Expected Results:**
@@ -236,7 +236,7 @@ Compare these conditions against the ideal requirements for this plant.
 
 **Prompt:**
 ```
-Compare these conditions for "monstera-deliciosa":
+Compare these conditions for "monstera deliciosa":
 - Soil moisture: 15%
 - Temperature: 22°C
 - Light: 2000 lux
@@ -294,7 +294,7 @@ What problems does the analysis identify?
 
 **Prompt:**
 ```
-Try to compare conditions for "monstera-deliciosa" with only these readings:
+Try to compare conditions for "monstera deliciosa" with only these readings:
 - Temperature: 22°C
 - Light: 2000 lux
 
@@ -371,7 +371,7 @@ Do all 4 tasks for the snake plant.
 
 **Prompt:**
 ```
-Get the plant care details for "monstera-deliciosa" in German (language code: "de"). Are any fields translated?
+Get the plant care details for "monstera deliciosa" in German (language code: "de"). Are any fields translated?
 ```
 
 **Expected Results:**
@@ -455,7 +455,7 @@ What happens if you try to search for an empty string "" in the plant database?
 
 **Prompt:**
 ```
-Request the care details for "monstera-deliciosa" twice in a row. Is the second request faster? (This tests the SDK's caching behavior)
+Request the care details for "monstera deliciosa" twice in a row. Is the second request faster? (This tests the SDK's caching behavior)
 ```
 
 **Expected Results:**
