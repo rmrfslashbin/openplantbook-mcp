@@ -2,7 +2,7 @@
   "manifest_version": "0.2",
   "name": "openplantbook-mcp",
   "display_name": "OpenPlantbook MCP Server",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Access OpenPlantbook's crowd-sourced plant care database from Claude",
   "long_description": "The OpenPlantbook MCP Server provides Claude with access to comprehensive plant care information including light, temperature, humidity, and moisture requirements for thousands of plant species. Search plants by name, get detailed care requirements, compare sensor readings against ideal conditions, and receive human-readable care summaries.",
 
