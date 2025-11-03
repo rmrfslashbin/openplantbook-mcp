@@ -23,6 +23,27 @@ MCP (Model Context Protocol) server that provides AI assistants like Claude with
 
 ### Installation
 
+#### 🎉 One-Click Installation (Recommended)
+
+Download the MCPB package for your platform from the [latest release](https://github.com/rmrfslashbin/openplantbook-mcp/releases/latest) and open it in Claude Desktop:
+
+- **macOS Apple Silicon**: `openplantbook-mcp-darwin-arm64.mcpb`
+- **macOS Intel**: `openplantbook-mcp-darwin-amd64.mcpb`
+- **Linux (x64)**: `openplantbook-mcp-linux-amd64.mcpb`
+- **Linux (ARM64)**: `openplantbook-mcp-linux-arm64.mcpb`
+- **Windows**: `openplantbook-mcp-windows-amd64.mcpb`
+
+Claude Desktop will automatically:
+1. Install the server
+2. Prompt you for your OpenPlantbook API key
+3. Configure everything for you
+
+Get your free API key at: https://open.plantbook.io/apikey/show/
+
+#### 📦 Manual Installation
+
+Alternatively, build from source or download standalone binaries:
+
 ```bash
 # Install from source
 git clone https://github.com/rmrfslashbin/openplantbook-mcp.git
@@ -33,24 +54,11 @@ make install
 make build
 ```
 
-### Configuration
+Or download pre-built binaries from the [latest release](https://github.com/rmrfslashbin/openplantbook-mcp/releases/latest).
 
-Set your OpenPlantbook API credentials via environment variables:
+### Manual Configuration
 
-```bash
-# Option 1: API Key authentication (recommended for read operations)
-export OPENPLANTBOOK_API_KEY="your_api_key_here"
-
-# Option 2: OAuth2 authentication (for full API access)
-export OPENPLANTBOOK_CLIENT_ID="your_client_id"
-export OPENPLANTBOOK_CLIENT_SECRET="your_client_secret"
-```
-
-Get your credentials from: https://open.plantbook.io/apikey/show/
-
-### Claude Desktop Setup
-
-Add to your Claude Desktop config file:
+If using manual installation, configure Claude Desktop:
 
 **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`

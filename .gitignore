@@ -28,6 +28,10 @@ config.json
 # MCP configuration (contains secrets)
 .mcp.json
 
+# MCPB build artifacts
+mcpb/server/
+*.mcpb
+
 # Logs
 logs/
 *.log

@@ -24,22 +24,38 @@ jobs:
       with:
         go-version: '1.23'
 
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install MCPB
+      run: npm install -g @anthropic-ai/mcpb
+
     - name: Run tests
       run: go test -v ./...
 
     - name: Build for all platforms
       run: make build-all
 
+    - name: Build platform-specific MCPB packages
+      run: make mcpb-pack-all
+
     - name: Create checksums
       run: |
         cd bin
-        sha256sum * > SHA256SUMS
+        sha256sum openplantbook-mcp-* > SHA256SUMS
         cat SHA256SUMS
 
     - name: Create Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         files: |
+          bin/openplantbook-mcp-linux-amd64.mcpb
+          bin/openplantbook-mcp-linux-arm64.mcpb
+          bin/openplantbook-mcp-darwin-amd64.mcpb
+          bin/openplantbook-mcp-darwin-arm64.mcpb
+          bin/openplantbook-mcp-windows-amd64.mcpb
           bin/openplantbook-mcp-linux-amd64
           bin/openplantbook-mcp-darwin-amd64
           bin/openplantbook-mcp-darwin-arm64
@@ -48,22 +64,44 @@ jobs:
         body: |
           ## OpenPlantbook MCP Server ${{ github.ref_name }}
 
-          MCP server that provides AI assistants like Claude with access to the OpenPlantbook API.
+          MCP server that provides AI assistants like Claude with access to the OpenPlantbook API - a crowd-sourced database of plant care information.
 
-          ### Installation
+          ### 🎉 One-Click Installation (MCPB)
 
-          Download the binary for your platform, make it executable, and configure it with your OpenPlantbook API credentials.
+          **Recommended**: Download the `.mcpb` package for your platform and open it in Claude Desktop for automatic installation:
 
-          See the [README](https://github.com/rmrfslashbin/openplantbook-mcp/blob/main/README.md) for full setup instructions.
+          - **macOS Apple Silicon**: `openplantbook-mcp-darwin-arm64.mcpb`
+          - **macOS Intel**: `openplantbook-mcp-darwin-amd64.mcpb`
+          - **Linux (x64)**: `openplantbook-mcp-linux-amd64.mcpb`
+          - **Linux (ARM64)**: `openplantbook-mcp-linux-arm64.mcpb`
+          - **Windows**: `openplantbook-mcp-windows-amd64.mcpb`
 
-          ### Checksums
+          Claude Desktop will prompt you for your OpenPlantbook API key and configure everything automatically.
+
+          ### 📦 Manual Installation
+
+          Alternatively, download the standalone binary for your platform and configure manually:
+
+          - **macOS Apple Silicon**: `openplantbook-mcp-darwin-arm64`
+          - **macOS Intel**: `openplantbook-mcp-darwin-amd64`
+          - **Linux (x64)**: `openplantbook-mcp-linux-amd64`
+          - **Windows**: `openplantbook-mcp-windows-amd64.exe`
+
+          See the [README](https://github.com/rmrfslashbin/openplantbook-mcp/blob/main/README.md) for manual setup instructions.
+
+          ### 🔑 Get Your API Key
+
+          Get a free API key at: https://open.plantbook.io/apikey/show/
+
+          ### ✅ Checksums
 
           See `SHA256SUMS` file for checksums of all binaries.
 
-          ### Changes
+          ### 📋 Full Changelog
 
           See the [commit history](https://github.com/rmrfslashbin/openplantbook-mcp/commits/${{ github.ref_name }}) for details.
         draft: false
         prerelease: false
+        generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,100 @@
+{
+  "manifest_version": "0.2",
+  "name": "openplantbook-mcp",
+  "display_name": "OpenPlantbook MCP Server",
+  "version": "1.1.0",
+  "description": "Access OpenPlantbook's crowd-sourced plant care database from Claude",
+  "long_description": "The OpenPlantbook MCP Server provides Claude with access to comprehensive plant care information including light, temperature, humidity, and moisture requirements for thousands of plant species. Search plants by name, get detailed care requirements, compare sensor readings against ideal conditions, and receive human-readable care summaries.",
+
+  "author": {
+    "name": "Robert Sigler",
+    "email": "code@sigler.io"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rmrfslashbin/openplantbook-mcp"
+  },
+
+  "homepage": "https://github.com/rmrfslashbin/openplantbook-mcp",
+  "documentation": "https://github.com/rmrfslashbin/openplantbook-mcp#readme",
+  "support": "https://github.com/rmrfslashbin/openplantbook-mcp/issues",
+  "license": "MIT",
+
+  "keywords": [
+    "plants",
+    "gardening",
+    "plant-care",
+    "openplantbook",
+    "sensors",
+    "iot",
+    "agriculture"
+  ],
+
+  "server": {
+    "type": "binary",
+    "entry_point": "server/openplantbook-mcp",
+    "mcp_config": {
+      "command": "${__dirname}/server/openplantbook-mcp",
+      "args": [],
+      "env": {
+        "OPENPLANTBOOK_API_KEY": "${user_config.api_key}",
+        "OPENPLANTBOOK_LOG_LEVEL": "${user_config.log_level}",
+        "OPENPLANTBOOK_LOG_FILE": "${user_config.log_file}"
+      }
+    }
+  },
+
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "OpenPlantbook API Key",
+      "description": "Your API key from https://open.plantbook.io/apikey/show/ (free registration required)",
+      "required": true
+    },
+    "log_level": {
+      "type": "string",
+      "title": "Log Level",
+      "description": "Logging verbosity: debug, info, warn, error (default: info)",
+      "required": false,
+      "default": "info"
+    },
+    "log_file": {
+      "type": "string",
+      "title": "Log File Path",
+      "description": "Optional path to log file for debugging (logs to stderr if not specified)",
+      "required": false,
+      "default": ""
+    }
+  },
+
+  "tools": [
+    {
+      "name": "search_plants",
+      "description": "Search for plants by common or scientific name in the OpenPlantbook database"
+    },
+    {
+      "name": "get_plant_care",
+      "description": "Get detailed care requirements for a specific plant including moisture, temperature, light, and humidity ranges"
+    },
+    {
+      "name": "get_care_summary",
+      "description": "Get a human-readable summary of plant care requirements with interpreted ranges"
+    },
+    {
+      "name": "compare_conditions",
+      "description": "Compare actual sensor readings against ideal plant care ranges and identify issues"
+    },
+    {
+      "name": "server_info",
+      "description": "Get server version, build information, and runtime status"
+    }
+  ],
+
+  "tools_generated": false,
+  "prompts_generated": false,
+
+  "compatibility": {
+    "platforms": ["darwin", "linux", "win32"]
+  }
+}
