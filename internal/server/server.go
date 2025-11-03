@@ -27,7 +27,7 @@ func New(config *Config, version string) (*Server, error) {
 	traceID := xid.New().String()
 
 	// Determine log output destination
-	var logWriter *os.File = os.Stderr
+	var logWriter = os.Stderr
 	if config.LogFile != "" {
 		var err error
 		logWriter, err = os.OpenFile(config.LogFile, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0644)
