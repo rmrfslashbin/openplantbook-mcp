@@ -3,7 +3,7 @@ module github.com/rmrfslashbin/openplantbook-mcp
 go 1.24.0
 
 require (
-	github.com/mark3labs/mcp-go v0.43.0
+	github.com/mark3labs/mcp-go v0.43.2
 	github.com/rmrfslashbin/openplantbook-go v1.1.3
 	github.com/rs/xid v1.6.0
 	github.com/spf13/viper v1.21.0
