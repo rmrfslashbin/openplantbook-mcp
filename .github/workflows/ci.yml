@@ -91,7 +91,7 @@ jobs:
       run: make build
 
     - name: Upload artifact
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: openplantbook-mcp-${{ matrix.os }}
         path: bin/
