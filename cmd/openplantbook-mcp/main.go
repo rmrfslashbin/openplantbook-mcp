@@ -23,6 +23,8 @@ func main() {
 	// Parse flags
 	configPath := flag.String("config", "", "Path to config file (default: ~/.config/openplantbook-mcp/config.json)")
 	showVersion := flag.Bool("version", false, "Show version information")
+	useHTTP := flag.Bool("http", false, "Use HTTP transport (Streamable HTTP) instead of stdio")
+	httpPort := flag.String("port", "8000", "HTTP server port (only used with --http)")
 	flag.Parse()
 
 	// Show version and exit
@@ -63,7 +65,13 @@ func main() {
 	// Run server in goroutine
 	errChan := make(chan error, 1)
 	go func() {
-		errChan <- srv.Run(ctx)
+		if *useHTTP {
+			slog.Info("starting HTTP server", "port", *httpPort)
+			errChan <- srv.RunHTTP(ctx, *httpPort)
+		} else {
+			slog.Info("starting stdio server")
+			errChan <- srv.Run(ctx)
+		}
 	}()
 
 	// Wait for shutdown signal or error

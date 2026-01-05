@@ -1,0 +1,39 @@
+# Git
+.git
+.gitignore
+.github
+
+# Documentation
+README.md
+*.md
+LICENSE
+
+# Build artifacts (keep only linux-amd64 binary)
+bin/openplantbook-mcp-darwin-*
+bin/openplantbook-mcp-windows-*
+bin/*.mcpb
+
+# Go build artifacts
+*.out
+coverage.html
+coverage.out
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Testing
+*_test.go
+testdata
+
+# MCPB artifacts (not needed for Docker)
+mcpb/
+
+# Examples
+examples/
+
+# CI/CD
+.github/

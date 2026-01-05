@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log/slog"
+	"net/http"
 	"os"
 
 	"github.com/mark3labs/mcp-go/mcp"
@@ -100,6 +101,56 @@ func (s *Server) Run(ctx context.Context) error {
 	}
 
 	return nil
+}
+
+// RunHTTP starts the MCP server using Streamable HTTP transport
+func (s *Server) RunHTTP(ctx context.Context, port string) error {
+	s.logger.Info("starting openplantbook-mcp server with HTTP transport")
+
+	// Create MCP server
+	mcpServer := server.NewMCPServer(
+		"openplantbook-mcp",
+		s.version,
+		server.WithToolCapabilities(true),
+	)
+
+	// Register all tools
+	if err := s.registerTools(mcpServer); err != nil {
+		return fmt.Errorf("register tools: %w", err)
+	}
+
+	// Create Streamable HTTP server
+	httpServer := server.NewStreamableHTTPServer(
+		mcpServer,
+		server.WithStateLess(true),        // Stateless mode for easier scaling
+		server.WithEndpointPath("/mcp"),   // MCP endpoint at /mcp
+	)
+
+	// Start HTTP server
+	addr := ":" + port
+	s.logger.Info("starting HTTP server", "address", addr, "endpoint", "/mcp")
+
+	httpSrv := &http.Server{
+		Addr:    addr,
+		Handler: httpServer,
+	}
+
+	// Start server in goroutine
+	errChan := make(chan error, 1)
+	go func() {
+		if err := httpSrv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			errChan <- err
+		}
+	}()
+
+	// Wait for context cancellation or error
+	select {
+	case <-ctx.Done():
+		s.logger.Info("shutting down HTTP server")
+		return httpSrv.Shutdown(context.Background())
+	case err := <-errChan:
+		return fmt.Errorf("HTTP server error: %w", err)
+	}
 }
 
 // registerTools registers all MCP tools
